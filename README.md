@@ -14,6 +14,7 @@ This project studies the relationship between weather conditions and dairy cow m
 - Lena-Mari Tamminen
 - Tomas Klingström
 - Martin Johnsson
+- Patricia Ask Gullstrand
 
 
 ## Features
