@@ -229,10 +229,16 @@ class FertilityDataProcessor:
 
         df['CI'] = df.groupby('SE_Number')['CalvingDate'].diff().dt.days
 
+        # Set PregnancyCheck: 1 for last insemination in the group, 0 otherwise
+        df['PregnancyCheck'] = df.groupby(['SE_Number', 'LactationNumber'])['InseminationDate'].transform(
+            lambda x: (x == x.max()).astype(int)
+        )
+
         df.sort_values(by=['SE_Number', 'InseminationDate'], inplace=True)
 
         self.fertility_data = df
         logging.info("Derived Data Calculated Successfully")
+
 
     def weather_preprocessing(self, points: list, start_date: datetime.date, end_date: datetime.date) -> None:
         param = 117
