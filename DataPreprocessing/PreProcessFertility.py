@@ -20,7 +20,7 @@ class FertilityDataProcessor:
 
     def load_insemination_data(self, start_date, end_date) -> None:
         logging.info("Loading Insemination Data...")
-        insemination_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Insemination.csv")
+        insemination_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Insemination240823.csv")
         insemination_data = pd.read_csv(insemination_data_directory, delimiter=";", low_memory=False)
 
         insemination_data.drop_duplicates(inplace=True)
@@ -52,7 +52,7 @@ class FertilityDataProcessor:
 
     def load_breed_birth_data(self) -> None:
         logging.info("Loading Breed & Birth Data...")
-        breed_data_directory = os.path.join(self.rawGIGACOW_directory, "Cow.csv")
+        breed_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Cow240823.csv")
         breed_data = pd.read_csv(breed_data_directory, delimiter=";", low_memory=False)
         
         breed_data.drop_duplicates(inplace=True)
@@ -66,7 +66,7 @@ class FertilityDataProcessor:
 
     def load_calving_data(self, start_date, end_date) -> None:
         logging.info("Loading Calving Data...")
-        calving_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Calving.csv")
+        calving_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Calving240823.csv")
         calving_data = pd.read_csv(calving_data_directory, delimiter=";", low_memory=False)
 
         calving_data.drop_duplicates(inplace=True)
@@ -112,7 +112,7 @@ class FertilityDataProcessor:
 
     def load_lactation_data(self) -> None:
         logging.info("Loading Lactation Data...")
-        lactation_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Lactation.csv")
+        lactation_data_directory = os.path.join(self.rawGIGACOW_directory, "Del_Lactation240823.csv")
         lactation_data = pd.read_csv(lactation_data_directory, delimiter=";", low_memory=False)
 
         lactation_data.drop_duplicates(inplace=True)
@@ -255,7 +255,7 @@ class FertilityDataProcessor:
             lon = point["lon"]
             pbar.set_description(f'Adding Global Irradiance and THI_adj to {name}')
 
-            fname = f"{name}_2022-2023.csv"
+            fname = f"{name}_2022-2024.csv"
             fpath = os.path.join(self.rawMESAN_directory, fname)
 
             if not os.path.exists(fpath):
@@ -426,7 +426,7 @@ class FertilityDataProcessor:
 def main():
     processor = FertilityDataProcessor()
     start_date = '2022-01-01 00:00:00'
-    end_date = '2023-11-13 23:00:00'
+    end_date = '2024-08-18 23:00:00'
     processor.preprocess(start_date=start_date, end_date=end_date, farms=None)
 
 if __name__ == "__main__":
