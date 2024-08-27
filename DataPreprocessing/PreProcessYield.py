@@ -27,6 +27,9 @@ class MilkDataProcessor:
             logging.error(f"File not found: {milk_data_directory}")
             return
         
+        # Drop all duplicate rows
+        milk_data = milk.drop_duplicates()
+        
         milk_data = milk.drop(columns=[
             "Del_Cow_Id", "LactationInfoSource", "OriginalFileSource", 
             "dwh_factCowMilk_Id", "dwh_factCowMilkOther_Id"
@@ -34,6 +37,7 @@ class MilkDataProcessor:
         milk_data["TotalYield"] = pd.to_numeric(milk_data["TotalYield"].str.replace(",", "."), errors="coerce")
         milk_data["StartDate"] = pd.to_datetime(milk_data["StartDate"], errors='coerce')
         milk_data["StartTime"] = pd.to_datetime(milk_data["StartTime"], format='%H:%M:%S', errors='coerce').dt.time
+
 
         mask_unknown_se = (milk_data['SE_Number'] == 'Unknown') & (milk_data['AnimalNumber'] != -1)
         milk_data.loc[mask_unknown_se, 'SE_Number'] = (
