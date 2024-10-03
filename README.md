@@ -89,7 +89,7 @@ Follow these steps to successfully run the models in this repo. Make sure you co
   Example in the script:
 ```python
   milk_data = pd.read_csv('../Data/MergedData/HeatApproachYieldDataTest.csv', dtype=dtype_dict)
-´´´
+```
   
 ## Repo structure
 ```
